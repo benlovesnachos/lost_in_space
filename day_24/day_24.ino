@@ -28,8 +28,8 @@
 #define AvionicsSW 8   //dip switch #2
 #define ProceedSW 7    //dip switch #3
 
-// pin 10 drives the BUZZER
-#define BUZZER 10
+// pin 10 drives the AudibleConfirm
+#define AudibleConfirm 10
 
 // Define the OLED screens to use
 #define SCREEN_STARTUP 0
@@ -144,29 +144,224 @@ void doLaunch() {
   } else { 
     drawScreen(SCREEN_LIFTOFF_FOR_REAL);
   }
-  tone(BUZZER, toneFreq, 4500);  // ... and play the tone for one second
-  delay(3000);
-  noTone(BUZZER);
   
   if (pause2 == 0) {
+    tone(AudibleConfirm, toneFreq, 4500);  // ... and play the tone for one second
+    delay(1500);
+    noTone(AudibleConfirm);
     delay(10000);
     resetDisplay();
-  } else { 
+  } else {
+    delay(3000);
+    //playVictoryFanfare();
+    liftoff();
     while(1);
   }
 }
 
 
 void playBeepBoop() {
-  tone(BUZZER, 476, 1500);
+  tone(AudibleConfirm, 476, 1500);
   delay(1500);
-  tone(BUZZER, 600, 1500);
+  tone(AudibleConfirm, 600, 1500);
   delay(1500);
-  tone(BUZZER, 800, 1500);
+  tone(AudibleConfirm, 800, 1500);
   delay(1500);
-  noTone(BUZZER);
+  noTone(AudibleConfirm);
 }
 
+void playVictoryFanfare() {
+tone(AudibleConfirm, 261, 350); //C4
+delay(350);
+tone(AudibleConfirm, 261, 350); //C4
+delay(350);
+tone(AudibleConfirm, 261, 350); //C4
+delay(350);
+tone(AudibleConfirm, 261, 500); //C4
+delay(500);
+tone(AudibleConfirm, 207, 400); //A3 Flat
+delay(350);
+tone(AudibleConfirm, 233, 400); //B3 Flat
+delay(350);
+tone(AudibleConfirm, 261, 400); //C4
+delay(350);
+tone(AudibleConfirm, 233, 400); //B3 Flat
+delay(350);
+tone(AudibleConfirm, 261, 1500); //C4
+delay(1500);
+noTone(AudibleConfirm);
+}
+
+
+void liftoff() {
+// original was 69 beats per minute; one quarter note = 1.15 seconds = 1150 milliseconds
+// LIST OF LENGTHS OF NOTES
+int q = 1150; // quarter note
+int h = q*2; // half note
+int w = h*2; // whole note
+int e = q/2; // eighth note
+int s = e/2; // sixteenth note
+int t = q/3; // triplet eighth note
+// LIST OF FREQUENCY VALUES
+int c2 = 65;
+int g2 = 98;
+int c3 = 131;
+int e3 = 165;
+int g3 = 196;
+int c4 = 263;
+int e4 = 330;
+int g4 = 392;
+int a4 = 440;
+int b4 = 494;
+int c5 = 523;
+int d5 = 587;
+int e5 = 659;
+int eb5 = 622;
+int f5 = 699;
+int g5 = 784;
+int a5 = 880;
+int b5 = 989;
+int c6 = 1047;
+
+// START
+tone(AudibleConfirm, c4, h);
+delay(h);
+tone(AudibleConfirm, g4, h);
+delay(h);
+//
+tone(AudibleConfirm, c5, h+q+e);
+delay(h+q+e);
+delay(e); // eigth rest
+tone(AudibleConfirm, e5, s);
+delay(s);
+//
+tone(AudibleConfirm, eb5, w);
+delay(w);
+//
+// DRUMS
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+//
+tone(AudibleConfirm, c4, h);
+delay(h);
+tone(AudibleConfirm, g4, h);
+delay(h);
+//
+tone(AudibleConfirm, c5, h+q+e);
+delay(h+q+e);
+delay(e); // eight rest
+tone(AudibleConfirm, eb5, s);
+delay(s);
+//
+tone(AudibleConfirm, e5, w);
+delay(w);
+//
+// DRUMS
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+tone(AudibleConfirm, c3, t);
+delay(t);
+tone(AudibleConfirm, g2, t);
+delay(t);
+//
+tone(AudibleConfirm, c4, h);
+delay(h);
+tone(AudibleConfirm, g4, h);
+delay(h);
+//
+tone(AudibleConfirm, c5, h+q+e);
+delay(h+q+e);
+delay(e); // eigth rest
+tone(AudibleConfirm, e5, s);
+delay(s);
+//
+tone(AudibleConfirm, f5, w);
+delay(w);
+//
+tone(AudibleConfirm, a4, s);
+delay(s);
+tone(AudibleConfirm, b4, s);
+delay(s);
+tone(AudibleConfirm, c5, e+h);
+delay(e+h);
+tone(AudibleConfirm, d5, q);
+delay(q);
+//
+tone(AudibleConfirm, e5, e);
+delay(e);
+tone(AudibleConfirm, f5, e);
+delay(e);
+tone(AudibleConfirm, g5, e);
+delay(e);
+
+tone(AudibleConfirm, e4, e);
+delay(e);
+tone(AudibleConfirm, c4, e);
+delay(e);
+tone(AudibleConfirm, g3, e);
+delay(e);
+tone(AudibleConfirm, e3, e);
+delay(e);
+
+tone(AudibleConfirm, e5, s);
+delay(s);
+tone(AudibleConfirm, f5, s);
+delay(s);
+//
+tone(AudibleConfirm, g5, h);
+delay(h);
+tone(AudibleConfirm, a5, q+s); // decelerando very manually
+delay(q+s);
+delay(s); // sixteenth rest
+tone(AudibleConfirm, b5, q+e);
+delay(q+e);
+delay(e); // sixteenth rest
+//
+tone(AudibleConfirm, c6, w);
+delay(w);
+// END
+noTone(AudibleConfirm);
+}
 // *****************************************************************************************
 //  This is our ISR which has the job of responding to interrupt events
 void updateEncoder() {
